@@ -1,0 +1,177 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family:Verdana, Tahoma, sans-serif;
+    font-family:'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+    font-size: 0.8rem;
+}
+
+#xAxis {
+    position: absolute;
+    top: 0;
+    left: 30px; 
+    width: 690px; 
+    height: 30px; 
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    font-size: 12px;
+    color: grey;
+}
+
+#yAxis {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 30px; 
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-left: 10px;
+    font-size: 12px;
+    color: grey;
+}
+
+#xAxis span {
+    width: 0;
+    text-align: center;
+}
+
+#game-container {
+    position: relative;
+    width: 700px;
+    /* top: 30px; */
+    /* left: 30px; */
+}
+
+canvas {
+    /* background-color: lightblue; */
+
+    display: block;
+    border: 1px solid black;
+}
+#messageBox {
+    width: 700px;
+    padding: 10px;
+    color: white;
+    /* background-color: lightgray; */
+    font-size:0.8rem;
+    border: 5px solid #333;
+    border-bottom: none;
+    
+}
+pre {
+    text-align: left;
+    white-space: pre-wrap;
+}
+
+/* CODE */
+.code-box {
+    width: 400px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-family: monospace;
+    margin-bottom: 20px;
+}
+
+.draggable {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.draggable:active {
+    background-color: #0056b3;
+}
+
+.input-field {
+    width: 50px;
+    font-family: monospace;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+form input[type="text"], form button {
+    margin-top: 10px;
+}
+
+#platform-buttons button {
+    background-color: lightblue;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+#platform-buttons button.active {
+    background-color: orange;
+}
+
+
+#creation-form {
+    /* background: red; */
+    padding: 10px;
+    border: 5px solid #333;
+}
+
+
+.action-element {
+    margin-left: 20px; 
+    border: 1px solid #ccc; 
+    padding: 5px; 
+    width: calc(100% - 70px); 
+    min-height:40px;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.draggable-span, button {
+    display:inline-block;
+    background-color: lightblue; 
+    padding: 5px; 
+    cursor: grab;
+    box-shadow: 1px 1px rgb(15, 77, 98);
+    border-radius: 5px;
+    position: relative;
+}
+
+button {
+    cursor: pointer;
+}
+
+#draggable-span-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+}
+
+.delete-btn {  
+    position: absolute; 
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%); 
+    margin-left : 5px;
+    background-color : rgb(192, 238, 253);
+    color : black;
+    border : none;
+    cursor : pointer;
+    padding : 2px 4px;
+    font-size : 0.5rem;
+    font-weight: 600;
+    box-shadow: 1px 1px rgb(15, 77, 98);
+    border-radius: 100%;
+}
