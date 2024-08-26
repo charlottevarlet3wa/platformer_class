@@ -62,12 +62,18 @@ canvas {
     /* background-color: lightgray; */
     font-size:0.8rem;
     border: 5px solid #333;
-    border-bottom: none;
     
 }
 pre {
     text-align: left;
     white-space: pre-wrap;
+}
+
+/* ERROR */
+#error {
+    color : red;
+    margin : 15px;
+    font-size: 1rem;
 }
 
 /* CODE */
