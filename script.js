@@ -24,6 +24,7 @@ const coins = [];
 const enemies = [];
 const doors = [];
 const walls = [];
+const spikes = [];
 
 let currentLevel = 0;
 
@@ -99,73 +100,6 @@ document.addEventListener("keydown", (event) => {
 function displayError(msg) {
   errElem.textContent = msg;
 }
-
-// document.getElementById("create-class-btn").addEventListener("click", () => {
-//   const newName = document.getElementById("new-name").value.trim();
-//   const actionElement = document.getElementById("dynamic-action-content");
-
-//   if (!newName) {
-//     displayError("Please enter a name for the new platform class.");
-//     return;
-//   }
-
-//   if (platformClasses[newName]) {
-//     displayError(
-//       `The name "${newName}" is already in use. Please choose a different name.`
-//     );
-//     return;
-//   }
-
-//   let actionCode = "";
-//   actionElement.childNodes.forEach((child) => {
-//     if (child.tagName === "SPAN") {
-//       // Ignore the delete button and only get the span text or input value
-//       const textContent = Array.from(child.childNodes)
-//         .filter((node) => {
-//           return node.nodeType === Node.TEXT_NODE || node.tagName === "INPUT";
-//         })
-//         .map((node) =>
-//           node.nodeType === Node.TEXT_NODE ? node.textContent : node.value
-//         )
-//         .join("");
-
-//       actionCode += textContent;
-//     }
-//   });
-
-//   if (!actionCode.trim()) {
-//     displayError(
-//       "The action code cannot be empty. Please provide a valid action."
-//     );
-//     return;
-//   }
-
-//   // Construire la classe de plateforme dynamiquement
-//   const NewPlatformClass = new Function(
-//     "Platform",
-//     `return class ${newName} extends Platform {
-//             constructor(x, y, width, height) {
-//                 super(x, y, width, height, '${newName}');
-//             }
-
-//             action(player) {
-//                 ${actionCode}
-//             }
-//         }`
-//   )(Platform);
-
-//   // Ajouter la nouvelle classe à la collection des types
-//   platformClasses[newName] = NewPlatformClass;
-//   types.push(newName);
-
-//   // Ajouter un bouton pour la nouvelle classe dans le conteneur des boutons
-//   const buttonContainer = document.getElementById("platform-buttons");
-//   const newButton = document.createElement("button");
-//   newButton.className = "platform-button";
-//   newButton.textContent = newName;
-//   newButton.addEventListener("click", () => selectPlatformType(newName));
-//   buttonContainer.appendChild(newButton);
-// });
 
 document.getElementById("create-class-btn").addEventListener("click", () => {
   const newName = document.getElementById("new-name").value.trim();
@@ -651,7 +585,284 @@ class Up extends Platform {
   }
 }
 
-// Fonction pour dessiner un rectangle avec des coins arrondis
+// class Spike {
+//   constructor(x, y, width, height, direction = "up") {
+//     this.x = x;
+//     this.y = y;
+//     this.width = width;
+//     this.height = height;
+//     this.direction = direction; // 'up', 'down', 'left', 'right'
+//     this.canInflictDamage = true; // To add a delay between damages
+//   }
+
+//   update(player) {
+//     if (this.checkCollisionWithPlayer(player)) {
+//       if (this.canInflictDamage) {
+//         playerLives--; // Réduire le nombre de vies du joueur
+
+//         // Appliquer une poussée selon la direction des piques
+//         switch (this.direction) {
+//           case "up":
+//             player.velocityY = JUMP_POWER;
+//             break;
+//           case "down":
+//             player.velocityY = -JUMP_POWER;
+//             break;
+//           case "left":
+//             player.velocityX = -PLAYER_SPEED;
+//             break;
+//           case "right":
+//             player.velocityX = PLAYER_SPEED;
+//             break;
+//         }
+
+//         this.canInflictDamage = false; // Prévenir les dommages continus
+//         setTimeout(() => {
+//           this.canInflictDamage = true;
+//         }, 1000); // 1 seconde de délai avant d'infliger à nouveau des dégâts
+//       }
+
+//       if (playerLives <= 0) {
+//         resetLevel();
+//       }
+//     }
+
+//     this.draw();
+//   }
+
+//   checkCollisionWithPlayer(player) {
+//     return (
+//       player.x < this.x + this.width &&
+//       player.x + player.width > this.x &&
+//       player.y < this.y + this.height &&
+//       player.y + player.height > this.y
+//     );
+//   }
+
+//   draw() {
+//     const triangleWidth = 15; // Largeur de chaque petit triangle
+//     const numberOfTriangles = Math.floor(this.width / triangleWidth); // Nombre de triangles
+//     ctx.fillStyle = "black";
+
+//     for (let i = 0; i < numberOfTriangles; i++) {
+//       const startX = this.x + i * triangleWidth;
+
+//       ctx.beginPath();
+//       switch (this.direction) {
+//         case "up":
+//           ctx.moveTo(startX, this.y + this.height);
+//           ctx.lineTo(startX + triangleWidth / 2, this.y);
+//           ctx.lineTo(startX + triangleWidth, this.y + this.height);
+//           break;
+//         case "down":
+//           ctx.moveTo(startX, this.y);
+//           ctx.lineTo(startX + triangleWidth / 2, this.y + this.height);
+//           ctx.lineTo(startX + triangleWidth, this.y);
+//           break;
+//         case "left":
+//           ctx.moveTo(this.x + this.width, startX);
+//           ctx.lineTo(this.x, startX + triangleWidth / 2);
+//           ctx.lineTo(this.x + this.width, startX + triangleWidth);
+//           break;
+//         case "right":
+//           ctx.moveTo(this.x, startX);
+//           ctx.lineTo(this.x + this.width, startX + triangleWidth / 2);
+//           ctx.lineTo(this.x, startX + triangleWidth);
+//           break;
+//       }
+//       ctx.closePath();
+//       ctx.fill();
+//     }
+//   }
+// }
+
+// class Spike {
+//   constructor(x, y, width, height, direction = "up") {
+//     this.x = x;
+//     this.y = y;
+//     this.width = width;
+//     this.height = height;
+//     this.direction = direction; // 'up', 'down', 'left', 'right'
+//     this.canInflictDamage = true; // To add a delay between damages
+//   }
+
+//   update(player) {
+//     if (this.checkCollisionWithPlayer(player)) {
+//       if (this.canInflictDamage) {
+//         playerLives--; // Réduire le nombre de vies du joueur
+
+//         // Appliquer une poussée selon la direction des piques
+//         switch (this.direction) {
+//           case "up":
+//             player.velocityY = JUMP_POWER;
+//             break;
+//           case "down":
+//             player.velocityY = -JUMP_POWER;
+//             break;
+//           case "left":
+//             player.velocityX = -PLAYER_SPEED;
+//             break;
+//           case "right":
+//             player.velocityX = PLAYER_SPEED;
+//             break;
+//         }
+
+//         this.canInflictDamage = false; // Prévenir les dommages continus
+//         setTimeout(() => {
+//           this.canInflictDamage = true;
+//         }, 1000); // 1 seconde de délai avant d'infliger à nouveau des dégâts
+//       }
+
+//       if (playerLives <= 0) {
+//         resetLevel();
+//       }
+//     }
+
+//     this.draw();
+//   }
+
+//   checkCollisionWithPlayer(player) {
+//     return (
+//       player.x < this.x + this.width &&
+//       player.x + player.width > this.x &&
+//       player.y < this.y + this.height &&
+//       player.y + player.height > this.y
+//     );
+//   }
+
+//   draw() {
+//     const triangleWidth = 15; // Largeur de chaque petit triangle
+//     const numberOfTriangles = Math.floor(this.height / triangleWidth); // Nombre de triangles pour les directions 'left' et 'right'
+//     ctx.fillStyle = "black";
+
+//     for (let i = 0; i < numberOfTriangles; i++) {
+//       const startY = this.y + i * triangleWidth;
+
+//       ctx.beginPath();
+//       switch (this.direction) {
+//         case "up":
+//           ctx.moveTo(this.x, this.y + this.height);
+//           ctx.lineTo(this.x + this.width / 2, this.y);
+//           ctx.lineTo(this.x + this.width, this.y + this.height);
+//           break;
+//         case "down":
+//           ctx.moveTo(this.x, this.y);
+//           ctx.lineTo(this.x + this.width / 2, this.y + this.height);
+//           ctx.lineTo(this.x + this.width, this.y);
+//           break;
+//         case "left":
+//           ctx.moveTo(this.x + this.width, startY);
+//           ctx.lineTo(this.x, startY + triangleWidth / 2);
+//           ctx.lineTo(this.x + this.width, startY + triangleWidth);
+//           break;
+//         case "right":
+//           ctx.moveTo(this.x, startY);
+//           ctx.lineTo(this.x + this.width, startY + triangleWidth / 2);
+//           ctx.lineTo(this.x, startY + triangleWidth);
+//           break;
+//       }
+//       ctx.closePath();
+//       ctx.fill();
+//     }
+//   }
+// }
+
+class Spike {
+  constructor(x, y, width, height, direction = "up") {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.direction = direction; // 'up', 'down', 'left', 'right'
+    this.canInflictDamage = true; // To add a delay between damages
+  }
+
+  update(player) {
+    if (this.checkCollisionWithPlayer(player)) {
+      if (this.canInflictDamage) {
+        playerLives--; // Réduire le nombre de vies du joueur
+
+        // Appliquer une poussée selon la direction des piques
+        switch (this.direction) {
+          case "up":
+            player.velocityY = JUMP_POWER;
+            break;
+          case "down":
+            player.velocityY = -JUMP_POWER;
+            break;
+          case "left":
+            player.velocityX = -PLAYER_SPEED;
+            break;
+          case "right":
+            player.velocityX = PLAYER_SPEED;
+            break;
+        }
+
+        this.canInflictDamage = false; // Prévenir les dommages continus
+        setTimeout(() => {
+          this.canInflictDamage = true;
+        }, 1000); // 1 seconde de délai avant d'infliger à nouveau des dégâts
+      }
+
+      if (playerLives <= 0) {
+        resetLevel();
+      }
+    }
+
+    this.draw();
+  }
+
+  checkCollisionWithPlayer(player) {
+    return (
+      player.x < this.x + this.width &&
+      player.x + player.width > this.x &&
+      player.y < this.y + this.height &&
+      player.y + player.height > this.y
+    );
+  }
+
+  draw() {
+    const triangleWidth = 15; // Largeur de chaque petit triangle
+    const numberOfTriangles =
+      this.direction === "up" || this.direction === "down"
+        ? Math.floor(this.width / triangleWidth) // Nombre de triangles pour 'up' et 'down' dépend de la largeur
+        : Math.floor(this.height / triangleWidth); // Nombre de triangles pour 'left' et 'right' dépend de la hauteur
+
+    ctx.fillStyle = "black";
+
+    for (let i = 0; i < numberOfTriangles; i++) {
+      const startX = this.x + i * triangleWidth; // Coordonnée de départ en X pour 'up' et 'down'
+      const startY = this.y + i * triangleWidth; // Coordonnée de départ en Y pour 'left' et 'right'
+
+      ctx.beginPath();
+      switch (this.direction) {
+        case "up":
+          ctx.moveTo(startX, this.y + this.height); // Bas du triangle
+          ctx.lineTo(startX + triangleWidth / 2, this.y); // Pointe du triangle
+          ctx.lineTo(startX + triangleWidth, this.y + this.height); // Bas du triangle
+          break;
+        case "down":
+          ctx.moveTo(startX, this.y); // Haut du triangle
+          ctx.lineTo(startX + triangleWidth / 2, this.y + this.height); // Pointe du triangle
+          ctx.lineTo(startX + triangleWidth, this.y); // Haut du triangle
+          break;
+        case "left":
+          ctx.moveTo(this.x + this.width, startY); // Droite du triangle
+          ctx.lineTo(this.x, startY + triangleWidth / 2); // Pointe du triangle
+          ctx.lineTo(this.x + this.width, startY + triangleWidth); // Droite du triangle
+          break;
+        case "right":
+          ctx.moveTo(this.x, startY); // Gauche du triangle
+          ctx.lineTo(this.x + this.width, startY + triangleWidth / 2); // Pointe du triangle
+          ctx.lineTo(this.x, startY + triangleWidth); // Gauche du triangle
+          break;
+      }
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+}
+
 function drawRoundedRect(ctx, x, y, width, height, radius) {
   if (typeof radius === "number") {
     radius = { tl: radius, tr: radius, br: radius, bl: radius };
@@ -862,6 +1073,9 @@ const levels = [
     ],
     doors: [{ x: 500, y: 100, width: 40, height: 50 }],
     walls: [],
+    spikes: [
+      { x: -2, y: 390, width: 705, height: 10, direction: "up" }, // Piques orientées vers le haut
+    ],
   },
   // level 2
   {
@@ -875,6 +1089,11 @@ const levels = [
       { x: 10, y: 180, width: 550, height: 10 },
       { x: 10, y: 200, width: 550, height: 80 },
       { x: 680, y: 220, width: 10, height: 170 },
+    ],
+    spikes: [
+      { x: 250, y: 170, width: 250, height: 10, direction: "up" }, // Piques orientées vers le haut
+      // { x: 400, y: 100, width: 50, height: 20, direction: "down" }, // Piques orientées vers le bas
+      { x: 670, y: 250, width: 10, height: 100, direction: "left" }, // Piques orientées vers le bas
     ],
   },
   // level 3
@@ -901,6 +1120,10 @@ const levels = [
       { x: 680, y: 250, width: 10, height: 130 },
       { x: 350, y: 300, width: 10, height: 100 },
     ],
+    spikes: [
+      { x: 400, y: 290, width: 120, height: 10, direction: "up" }, // Piques orientées vers le haut
+      { x: 580, y: 390, width: 80, height: 10, direction: "up" }, // Piques orientées vers le bas
+    ],
   },
 
   // level 4
@@ -920,6 +1143,7 @@ const levels = [
 
       { x: 0, y: 150, width: 700, height: 15 },
     ],
+    spikes: [],
   },
   // level 5
   {
@@ -941,6 +1165,7 @@ const levels = [
       { x: 90, y: 340, width: 125, height: 230 },
       { x: 420, y: 0, width: 280, height: 230 },
     ],
+    spikes: [],
   },
 ];
 
@@ -951,6 +1176,7 @@ function loadLevel(levelIndex) {
   coins.length = 0;
   doors.length = 0;
   walls.length = 0;
+  spikes.length = 0;
 
   player.x = levelData.player.x;
   player.y = levelData.player.y;
@@ -976,6 +1202,13 @@ function loadLevel(levelIndex) {
 
   levelData.doors.forEach((data) => {
     doors.push(new Door(data.x, data.y, data.width, data.height));
+  });
+
+  // Ajouter des piques
+  levelData.spikes.forEach((data) => {
+    spikes.push(
+      new Spike(data.x, data.y, data.width, data.height, data.direction)
+    );
   });
 
   // Réinitialiser la couleur des boutons après le chargement du niveau
@@ -1021,13 +1254,15 @@ function gameLoop() {
   coins.forEach((coin) => coin.draw());
   doors.forEach((door) => door.update(player));
   walls.forEach((wall) => wall.update(player));
+  spikes.forEach((spike) => spike.update(player)); // Ajout de cette ligne
 
   // Dessiner la grille si le niveau est supérieur ou égal à 5
   if (currentLevel == 4) {
     drawGrid();
   }
 
-  ctx.fillStyle = "black";
+  // ctx.fillStyle = "black";
+  ctx.fillStyle = "orange";
   ctx.font = "20px Arial";
   ctx.fillText(`Coins: ${collectedCoins}`, canvas.width - 100, 30);
   // ctx.fillText(`Lives: ${playerLives}`, 10, 30);
