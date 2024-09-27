@@ -1,70 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simple Mario Game</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.css" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- <div id="xAxis"></div> -->
-    <!-- <div id="yAxis"></div> -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div id="game-container">
-        <canvas id="gameCanvas" width="700" height="400"></canvas>
-        <div id="platform-buttons"></div>
-        <div id="messageBox">Message</div>
-        <div id="error"></div>
-        <div id="creation-form">
-            <h3>Nouvelle classe</h3>
-            <div>
-                <span>class </span>
-                <input id="new-name" type="text" placeholder="name" />
-                <span> extends Platform {</span>
-            </div>
-        
-            <div style="margin-left: 20px;">
-                <span>constructor(x, y, width, height) {</span><br>
-                <span style="margin-left: 20px;">super(x, y, width, height);</span><br>
-                <span>}</span>
-            </div>
-        
-            <div style="margin-left: 20px;">
-                <span>action(player) {</span>
-                <div id="dynamic-action-content" class="action-element">
-                    <!-- This div will be filled dynamically -->
-                </div>
-                <span>}</span>
-            </div>
-        
-            <div>
-                <span>}</span>
-            </div>
-            <button id="create-class-btn">Create subclass</button>
+      <canvas id="gameCanvas" width="700" height="400"></canvas>
+      <div id="platform-buttons"></div>
+      <div id="messageBox">Message</div>
+      <div id="error"></div>
+      <div id="creation-form">
+        <h3>Nouvelle classe</h3>
+        <div>
+          <span>class </span>
+          <input id="new-name" type="text" placeholder="name" />
+          <span> extends Platform {</span>
         </div>
-        <!-- Drag and drop span -->
-        <div id="draggable-span-container" style="margin-top: 20px;">
-            <div>
-                <span class="draggable-span" draggable="true">this.x</span>
-                <span class="draggable-span" draggable="true">this.y</span>
-            </div>
-            <div>
-                <span class="draggable-span" draggable="true">player.x</span>
-                <span class="draggable-span" draggable="true">player.y</span>
-            </div>
-            <div>
-                <span class="draggable-span" draggable="true">=</span>
-                <span class="draggable-span" draggable="true">;</span>
-                <span class="draggable-span" draggable="true">+</span>
-                <span class="draggable-span" draggable="true">-</span>
-            </div>
-            <div>
-                <span class="draggable-span" draggable="true">int</span>
-            </div>
+
+        <div style="margin-left: 20px">
+          <span>constructor(x, y, width, height) {</span><br />
+          <span style="margin-left: 20px">super(x, y, width, height);</span
+          ><br />
+          <span>}</span>
         </div>
+
+        <div style="margin-left: 20px">
+          <span>action(player) {</span>
+          <div id="dynamic-action-content" class="action-element">
+            <!-- This div will be filled dynamically -->
+          </div>
+          <span>}</span>
+        </div>
+
+        <div>
+          <span>}</span>
+        </div>
+        <button id="create-class-btn">Create subclass</button>
+      </div>
+      <!-- Drag and drop span -->
+      <div id="draggable-span-container" style="margin-top: 20px">
+        <div>
+          <span class="draggable-span" draggable="true">this.x</span>
+          <span class="draggable-span" draggable="true">this.y</span>
+        </div>
+        <div>
+          <span class="draggable-span" draggable="true">player.x</span>
+          <span class="draggable-span" draggable="true">player.y</span>
+        </div>
+        <div>
+          <span class="draggable-span" draggable="true">=</span>
+          <span class="draggable-span" draggable="true">;</span>
+          <span class="draggable-span" draggable="true">+</span>
+          <span class="draggable-span" draggable="true">-</span>
+        </div>
+        <div>
+          <span class="draggable-span" draggable="true">int</span>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.js"></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
